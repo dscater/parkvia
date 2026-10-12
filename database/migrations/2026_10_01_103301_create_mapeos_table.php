@@ -16,9 +16,8 @@ class CreateMapeosTable extends Migration
         Schema::create('mapeos', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->string('dispositivo')->unique();
             $table->bigInteger('ubicacion_id')->unsigned();
-            $table->binary('ocupado')->nullable();
+            $table->integer('ocupado')->nullable();
             $table->integer('vehiculo_id')->nullable();
             $table->timestamps();
 

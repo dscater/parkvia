@@ -100,6 +100,8 @@ class DatosUsuarioController extends Controller
     public function update(Request $request, DatosUsuario $datosUsuario)
     {
         $datosUsuario->update(array_map('mb_strtoupper', $request->except('foto')));
+        $datosUsuario->user->tipo = $request->tipo;
+        $datosUsuario->user->save();
         if ($request->hasFile('foto')) {
             // ELIMINAR FOTO ANTIGUA
             $foto_antigua = $datosUsuario->foto;

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VehiculoStoreRequest;
 use App\Models\Empresa;
-use App\Models\Http\Requests\VehiculoStoreRequest;
 
-use App\Models\Http\Requests\VehiculoUpdateRequest;
+use App\Http\Requests\VehiculoUpdateRequest;
 use App\Models\IngresoSalida;
 use App\Models\LogSeguimiento;
 use App\Models\Mapeo;
@@ -16,7 +16,7 @@ use App\Models\Tarifa;
 use App\Models\TipoVehiculo;
 use App\Models\User;
 use App\Models\Vehiculo;
-use Barryvdh\DomPDF\Facade as PDF;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -260,7 +260,6 @@ class VehiculoController extends Controller
     public function kardex(Vehiculo $vehiculo)
     {
         $empresa = Empresa::first();
-
         $pdf = PDF::loadView('vehiculos.kardex', compact('vehiculo', 'empresa'))->setPaper('letter', 'portrait');
         $pdf->output();
         $dom_pdf = $pdf->getDomPDF();

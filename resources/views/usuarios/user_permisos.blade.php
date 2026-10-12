@@ -19,11 +19,10 @@
 @endsection
 
 @section('nom_empresa')
-    {{ torremall\Empresa::first()->name }}
+    {{ App\Models\Empresa::first()->name }}
 @endsection
 
 @section('content')
-
     <section class="content">
         <div class="container-fluid">
             <!-- Basic Examples -->
@@ -128,10 +127,8 @@
 
     <script type="text/javascript">
         @if (session('success'))
-            showNotification('alert-success', 'USUARIO REGISTRADO CON ÉXITO!!! ','top', 'right', 'animated bounceInRight',
-            'animated bounceOutRight');
+            showNotification('alert-success', 'USUARIO REGISTRADO CON ÉXITO!!! ', 'top', 'right', 'animated bounceInRight',
+                'animated bounceOutRight');
         @endif
-
     </script>
-
 @endsection

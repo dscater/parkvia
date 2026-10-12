@@ -6,6 +6,7 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngresoSalidaController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\MapeoController;
 use App\Http\Controllers\NotificacionUsuarioController;
 use App\Http\Controllers\PendienteController;
 use App\Http\Controllers\PropietarioController;

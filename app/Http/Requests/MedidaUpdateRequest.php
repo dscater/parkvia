@@ -1,6 +1,6 @@
 <?php
 
-namespace torremall\Http\Requests;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,8 +24,8 @@ class MedidaUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'nom' => 'unique:medidas,nom,'.$this->medida->id,
-            'simbolo' => 'unique:medidas,simbolo,'.$this->medida->id,
+            'nom' => 'unique:medidas,nom,' . $this->medida->id,
+            'simbolo' => 'unique:medidas,simbolo,' . $this->medida->id,
         ];
     }
 

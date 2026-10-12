@@ -1,6 +1,6 @@
 <?php
 
-namespace torremall\Http\Requests;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,7 @@ class ControlUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'unique:users,name,'.$this->user->id,
+            'name' => 'unique:users,name,' . $this->user->id,
         ];
     }
 

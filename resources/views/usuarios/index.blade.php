@@ -25,13 +25,13 @@
         <div class="container-fluid">
             <div class="row clearfix">
                 @if (Auth::user()->hasPermiso('users.create'))
-                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 botones">
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 botones">
                         <a href="{{ route('users.create') }}" class="btn btn-primary"><i
                                 class="material-icons">person_add</i><span>Nuevo usuario</span></a>
                     </div>
                 @endif
                 @if (Auth::user()->hasPermiso('user_permisos.edit'))
-                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 botones">
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 botones">
                         <form action="{{ route('user_permisos.permisos_usuarios_faltantes') }}" method="POST"
                             id="formPermisosFaltantes">@csrf</form>
                         <a type="button" onclick="document.getElementById('formPermisosFaltantes').submit()"

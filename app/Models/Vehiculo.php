@@ -20,6 +20,25 @@ class Vehiculo extends Model
         'status'
     ];
 
+    protected $appends = ["url_foto", "foto_b64"];
+
+    public function getUrlFotoAttribute()
+    {
+        return asset("imgs/vehiculos/" . $this->foto);
+    }
+
+    public function getFotoB64Attribute()
+    {
+        $path = public_path("imgs/vehiculos/" . $this->foto);
+        if (file_exists($path)) {
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+            return $base64;
+        }
+        return "";
+    }
+
     public function propietario()
     {
         return $this->belongsTo('App\Models\Propietario', 'propietario_id', 'id');

@@ -1,6 +1,6 @@
 <?php
 
-namespace torremall\Http\Requests;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,7 @@ class MarcaUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'nom' => 'unique:marcas,nom,'.$this->marca->id,
+            'nom' => 'unique:marcas,nom,' . $this->marca->id,
         ];
     }
 

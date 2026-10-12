@@ -1,6 +1,6 @@
 <?php
 
-namespace torremall\Http\Requests;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,7 @@ class TipoUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'nom' => 'unique:tipos,nom,'.$this->tipo->id,
+            'nom' => 'unique:tipos,nom,' . $this->tipo->id,
         ];
     }
 

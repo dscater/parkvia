@@ -1,6 +1,6 @@
 <?php
 
-namespace torremall\Http\Requests;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,7 @@ class VehiculoUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'rfid' => 'unique:vehiculos,rfid,'.$this->vehiculo->id,
+            'rfid' => 'unique:vehiculos,rfid,' . $this->vehiculo->id,
         ];
     }
 
