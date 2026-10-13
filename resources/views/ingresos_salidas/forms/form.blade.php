@@ -7,6 +7,7 @@
     <div class="col-md-4">
         <div class="form-group form-float">
             <div class="form-line">
+                <input type="hidden" id="manual" value="si">
                 <input type="text" name="rfid" id="is_rfid"
                     value="{{ isset($ingreso_salida) ? $ingreso_salida->rfid : '' }}" class="form-control" required>
                 <label class="form-label">RFID*</label>

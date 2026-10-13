@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('password');
-            $table->enum('tipo', ['ADMINISTRADOR', 'AUXILIAR']);
+            $table->enum('tipo', ['ADMINISTRADOR', 'AUXILIAR', 'CONTROL']);
             $table->string('foto');
             $table->integer('status');
             $table->timestamps();

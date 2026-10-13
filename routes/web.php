@@ -14,6 +14,7 @@ use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\TarifaController;
 use App\Http\Controllers\TipoVehiculoController;
 use App\Http\Controllers\UbicacionController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPermisoController;
 use App\Http\Controllers\VehiculoController;
 use Illuminate\Support\Facades\Route;

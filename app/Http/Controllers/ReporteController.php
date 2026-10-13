@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Empresa;
 use App\Models\Reporte;
 
-use Barryvdh\DomPDF\Facade as PDF;
+use PDF;
 use App\Models\DatosUsuario;
 use App\Models\IngresoSalida;
 use App\Models\Tarifa;

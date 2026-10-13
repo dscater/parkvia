@@ -1,190 +1,196 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Factura</title>
     <style type="text/css">
-    *{
-        /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
-    }
+        * {
+            /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+        }
 
-    @page{
-        margin-left: 0;
-        margin-top: 0cm;
-        margin-right: 0cm;
-        margin-bottom: 0cm;
-    }
+        @page {
+            margin-left: 0;
+            margin-top: 0cm;
+            margin-right: 0cm;
+            margin-bottom: 0cm;
+        }
 
-    body{
-        position: relative;
-    }
+        body {
+            position: relative;
+        }
 
-    /* FACURA */
-    .contenedor_factura{
-        font-size: 0.9em;
-        width: 7cm!important;
-        padding-top: 15px; 
-        padding-bottom: 15px; 
-        position: abosulte;
-    }
+        /* FACURA */
+        .contenedor_factura {
+            font-size: 0.9em;
+            width: 7cm !important;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            position: abosulte;
+        }
 
-    .elemento{
-        text-align: center;
-    }
+        .elemento {
+            text-align: center;
+        }
 
-    .separador{
-        padding: 0px;
-        margin:0px;
-    }
+        .separador {
+            padding: 0px;
+            margin: 0px;
+        }
 
-    .fono, .lp{
-        font-size: 0.75em;
-    }
+        .fono,
+        .lp {
+            font-size: 0.75em;
+        }
 
-    .txt_fo{
-        margin-top:3px;
-    }
+        .txt_fo {
+            margin-top: 3px;
+        }
 
-    .detalle{
-        border-top:dashed 1px black;
-        border-bottom:dashed 1px black;
-    }
+        .detalle {
+            border-top: dashed 1px black;
+            border-bottom: dashed 1px black;
+        }
 
-    .act_eco{
-        font-size: 0.73em;
-    }
+        .act_eco {
+            font-size: 0.73em;
+        }
 
-    .info1{
-        text-align: center;
-        font-weight: bold;
-        font-size: 0.75em;
-    }
-    .info2{
-        text-align: center;
-        font-weight: bold;
-        font-size: 0.7em;
-    }
+        .info1 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.75em;
+        }
 
-    .izquierda{
-        text-align: left;
-        padding-left: 5px; 
-    }
+        .info2 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.7em;
+        }
 
-    .derecha{
-        text-align: right;
-        padding-right: 5px; 
-    }
+        .izquierda {
+            text-align: left;
+            padding-left: 5px;
+        }
 
-    .informacion{
-        padding: 5px;
-        width: 100%;
-    }
+        .derecha {
+            text-align: right;
+            padding-right: 5px;
+        }
 
-    .bold{
-        font-weight: bold;
-    }
+        .informacion {
+            padding: 5px;
+            width: 100%;
+        }
 
-    .cobro{
-        width: 100%;
-        padding: 5px;
-    }
+        .bold {
+            font-weight: bold;
+        }
 
-    .cobro table{
-        width: 100%;
-    }
+        .cobro {
+            width: 100%;
+            padding: 5px;
+        }
 
-    .centreado{
-        text-align: center;
-    }
+        .cobro table {
+            width: 100%;
+        }
 
-    .cobro table tr td{
-        font-size: 0.7em;
-    }
+        .centreado {
+            text-align: center;
+        }
 
-    .literal{
-        font-size: 0.7em;
-    }
+        .cobro table tr td {
+            font-size: 0.7em;
+        }
 
-    .cod_control, .fecha_emision{
-        font-size: 0.9em;
-    }
+        .literal {
+            font-size: 0.7em;
+        }
 
-    .cobro table{
-        border-collapse: collapse;
-    }
+        .cod_control,
+        .fecha_emision {
+            font-size: 0.9em;
+        }
 
-    .cobro table tr.punteado td{
-        border-top:dashed 1px black;
-        border-bottom:dashed 1px black;
-    }
-    
-    .qr img{
-        width: 160px;
-        height: 160px;
-    }
+        .cobro table {
+            border-collapse: collapse;
+        }
 
-    .total{
-        font-size: 0.9em!important;
-    }
+        .cobro table tr.punteado td {
+            border-top: dashed 1px black;
+            border-bottom: dashed 1px black;
+        }
 
+        .qr img {
+            width: 160px;
+            height: 160px;
+        }
+
+        .total {
+            font-size: 0.9em !important;
+        }
     </style>
 </head>
+
 <body>
     <div class="contenedor_factura">
         <div class="elemento nom_empresa">
-            "{{$empresa->name}}"
+            "{{ $empresa->name }}"
         </div>
         <div class="elemento direccion">
-            {{$empresa->zona}} {{$empresa->calle}} {{$empresa->nro}}
+            {{ $empresa->zona }} {{ $empresa->calle }} {{ $empresa->nro }}
         </div>
         <div class="elemento fono">
-            Teléfono: {{$empresa->fono}}
+            Teléfono: {{ $empresa->fono }}
         </div>
         <div class="elemento lp">
-            {{$empresa->dpto}} - {{$empresa->pais}}
+            {{ $empresa->dpto }} - {{ $empresa->pais }}
         </div>
         <div class="elemento txt_fo">
             FACTURA ORIGINAL
         </div>
         <div class="elemento detalle">
-            NIT: {{$empresa->nit}} <br>
-            FACTURA NRO: {{$cobro->factura->nro_factura}} <br>
-            AUTORIZACIÓN: {{$empresa->nro_aut}}
+            NIT: {{ $empresa->nit }} <br>
+            FACTURA NRO: {{ $cobro->factura->nro_factura }} <br>
+            AUTORIZACIÓN: {{ $empresa->nro_aut }}
         </div>
         <div class="elemento act_eco">
-            Act. Eco.: "{{$empresa->actividad_eco}}"
+            Act. Eco.: "{{ $empresa->actividad_eco }}"
         </div>
         <div class="informacion">
             <table>
                 <tr>
                     <td width="10%">Fecha:</td>
-                    <td class="izquierda">{{$cobro->fecha_reg}}</td>
+                    <td class="izquierda">{{ $cobro->fecha_reg }}</td>
                 </tr>
                 <tr>
                     <td>Hora:</td>
-                    <td class="izquierda">{{$cobro->hora}}</td>
+                    <td class="izquierda">{{ $cobro->hora }}</td>
                 </tr>
                 <tr>
                     <td>Señor(es):</td>
-                    <td class="izquierda">{{$cobro->factura->a_nombre}}</td>
+                    <td class="izquierda">{{ $cobro->factura->a_nombre }}</td>
                 </tr>
                 <tr>
                     <td>NIT/CI:</td>
-                    <td class="izquierda">{{$cobro->factura->nit}}</td>
+                    <td class="izquierda">{{ $cobro->factura->nit }}</td>
                 </tr>
                 <tr>
                     <td>Entrada:</td>
-                    <td class="izquierda">{{date('H:i',strtotime($cobro->hora_ingreso))}} {{date('d/m/Y',strtotime($cobro->fecha_ingreso))}}</td>
+                    <td class="izquierda">{{ date('H:i', strtotime($cobro->hora_ingreso)) }}
+                        {{ date('d/m/Y', strtotime($cobro->fecha_ingreso)) }}</td>
                 </tr>
                 <tr>
                     <td>Salida:</td>
-                    <td class="izquierda">{{date('H:i',strtotime($cobro->salida->hora))}} {{date('d/m/Y',strtotime($cobro->salida->fecha_reg))}}</td>
+                    <td class="izquierda">{{ date('H:i', strtotime($cobro->salida->hora)) }}
+                        {{ date('d/m/Y', strtotime($cobro->salida->fecha_reg)) }}</td>
                 </tr>
                 <tr>
                     <td>Tiempo:</td>
-                    <td class="izquierda">{{$cobro->tiempo_cobrado}} HORA(S)</td>
+                    <td class="izquierda">{{ $cobro->tiempo_cobrado }} HORA(S)</td>
                 </tr>
             </table>
         </div>
@@ -198,27 +204,28 @@
                 </tr>
                 <tr>
                     <td class="centreado">1</td>
-                    <td class="izquierda">SERVICIO DE PARQUEO - {{$cobro->tarifa->nom}} {{$cobro->tarifa->horas}} HORA(S)</td>
-                    <td class="centreado">{{$cobro->tarifa->precio}}</td>
-                    <td class="centreado">{{$cobro->total}}</td>
+                    <td class="izquierda">SERVICIO DE PARQUEO - {{ $cobro->tarifa->nom }} {{ $cobro->tarifa->horas }}
+                        HORA(S)</td>
+                    <td class="centreado">{{ $cobro->tarifa->precio }}</td>
+                    <td class="centreado">{{ $cobro->total }}</td>
                 </tr>
                 <tr>
                     <td colspan="3" class="derecha bold">TOTAL Bs.</td>
-                    <td class="centreado">{{$cobro->total}}</td>
+                    <td class="centreado">{{ $cobro->total }}</td>
                 </tr>
             </table>
         </div>
         <div class="izquierda literal">
-            Son: {{$literal}}
+            Son: {{ $literal }}
         </div>
         <div class="izquierda cod_control">
-            CÓDIGO DE CONTROL: {{$cobro->factura->codigo_control}}
+            CÓDIGO DE CONTROL: {{ $cobro->factura->codigo_control }}
         </div>
         <div class="izquierda fecha_emision">
-            FECHA LÍMITE DE EMISIÓN: {{$cobro->factura->fecha_emision}}
+            FECHA LÍMITE DE EMISIÓN: {{ $cobro->factura->fecha_emision }}
         </div>
         <div class="centreado qr">
-            <img src="{{asset('imgs/qr/'.$cobro->factura->qr)}}" alt="">    
+            <img src="{{ $cobro->factura->qr_b64 }}" alt="">
         </div>
         <div class="mensaje">
             <div class="info1">
@@ -230,4 +237,5 @@
         </div>
     </div>
 </body>
+
 </html>

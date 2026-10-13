@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 12-10-2026 a las 15:33:19
+-- Tiempo de generación: 13-10-2026 a las 15:25:31
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.2.22
 
@@ -42,6 +42,19 @@ CREATE TABLE `cobros` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `cobros`
+--
+
+INSERT INTO `cobros` (`id`, `salida_id`, `vehiculo_id`, `tarifa_id`, `tiempo_cobrado`, `fecha_reg`, `hora`, `hora_ingreso`, `fecha_ingreso`, `total`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, 1, 1, '2026-10-13', '10:42:00', '10:41:00', '2026-10-13', 40.00, 1, '2026-10-13 14:42:16', '2026-10-13 14:42:16'),
+(2, 4, 2, 1, 1, '2026-10-13', '10:45:00', '10:44:00', '2026-10-13', 40.00, 1, '2026-10-13 14:45:09', '2026-10-13 14:45:09'),
+(3, 6, 1, 1, 1, '2026-10-13', '11:13:00', '11:13:00', '2026-10-13', 40.00, 1, '2026-10-13 15:13:46', '2026-10-13 15:13:46'),
+(4, 8, 1, 1, 1, '2026-10-13', '11:14:00', '11:14:00', '2026-10-13', 40.00, 1, '2026-10-13 15:14:47', '2026-10-13 15:14:47'),
+(5, 10, 2, 1, 1, '2026-10-13', '11:17:00', '11:16:00', '2026-10-13', 40.00, 1, '2026-10-13 15:17:23', '2026-10-13 15:17:23'),
+(6, 12, 1, 1, 1, '2026-10-13', '11:21:00', '11:20:00', '2026-10-13', 40.00, 1, '2026-10-13 15:21:11', '2026-10-13 15:21:11'),
+(7, 14, 2, 1, 1, '2026-10-13', '11:24:00', '11:24:00', '2026-10-13', 40.00, 1, '2026-10-13 15:24:20', '2026-10-13 15:24:20');
 
 -- --------------------------------------------------------
 
@@ -121,6 +134,8 @@ INSERT INTO `empresas` (`id`, `cod`, `nit`, `nro_aut`, `nro_emp`, `name`, `alias
 CREATE TABLE `facturas` (
   `id` bigint UNSIGNED NOT NULL,
   `cobro_id` bigint UNSIGNED NOT NULL,
+  `a_nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nro_factura` bigint NOT NULL,
   `codigo_control` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `qr` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -133,6 +148,19 @@ CREATE TABLE `facturas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `facturas`
+--
+
+INSERT INTO `facturas` (`id`, `cobro_id`, `a_nombre`, `nit`, `nro_factura`, `codigo_control`, `qr`, `total`, `fecha`, `hora`, `fecha_emision`, `estado`, `observacion`, `created_at`, `updated_at`) VALUES
+(1, 1, 'GONZALES', '234234234', 10001, 'C4-CD-DC-75-C5', '10001_1791902536.png', 40.00, '2026-10-13', '10:42:00', '2027-04-13', 1, '', '2026-10-13 14:42:16', '2026-10-13 14:42:16'),
+(2, 2, 'GONZALES', '234234234', 10002, 'E5-8D-46-9B-4C', '10002_1791902709.png', 40.00, '2026-10-13', '10:45:00', '2027-04-13', 1, '', '2026-10-13 14:45:09', '2026-10-13 14:45:09'),
+(3, 3, 'GONZALES', '234234234', 10003, 'A2-31-2A-CE-D3', '10003_1791904426.png', 40.00, '2026-10-13', '11:13:00', '2027-04-13', 1, '', '2026-10-13 15:13:46', '2026-10-13 15:13:46'),
+(4, 4, 'GONZALES', '234234234', 10004, '26-56-73-79-3E', '10004_1791904487.png', 40.00, '2026-10-13', '11:14:00', '2027-04-13', 1, '', '2026-10-13 15:14:47', '2026-10-13 15:14:47'),
+(5, 5, 'GONZALES', '234234234', 10005, '94-96-85-65-FB', '10005_1791904643.png', 40.00, '2026-10-13', '11:17:00', '2027-04-13', 1, '', '2026-10-13 15:17:23', '2026-10-13 15:17:23'),
+(6, 6, 'GONZALES', '234234234', 10006, 'A7-32-D4-87-E9', '10006_1791904871.png', 40.00, '2026-10-13', '11:21:00', '2027-04-13', 1, '', '2026-10-13 15:21:11', '2026-10-13 15:21:11'),
+(7, 7, 'ERIC GONZALES', '234234234', 10007, '63-CE-82-89-81', '10007_1791905060.png', 40.00, '2026-10-13', '11:24:00', '2027-04-13', 1, '', '2026-10-13 15:24:20', '2026-10-13 15:24:33');
 
 -- --------------------------------------------------------
 
@@ -152,6 +180,26 @@ CREATE TABLE `ingreso_salidas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `ingreso_salidas`
+--
+
+INSERT INTO `ingreso_salidas` (`id`, `vehiculo_id`, `accion`, `hora`, `observacion`, `fecha_reg`, `tipo`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'INGRESO', '10:41:00', '', '2026-10-13', 'NORMAL', 1, '2026-10-13 14:42:07', '2026-10-13 14:42:07'),
+(2, 1, 'SALIDA', '10:42:00', '', '2026-10-13', 'NORMAL', 1, '2026-10-13 14:42:16', '2026-10-13 14:42:16'),
+(3, 2, 'INGRESO', '10:44:00', '', '2026-10-13', 'NORMAL', 1, '2026-10-13 14:45:02', '2026-10-13 14:45:02'),
+(4, 2, 'SALIDA', '10:45:00', '', '2026-10-13', 'NORMAL', 1, '2026-10-13 14:45:09', '2026-10-13 14:45:09'),
+(5, 1, 'INGRESO', '11:13:00', NULL, '2026-10-13', 'NORMAL', 1, '2026-10-13 15:13:43', '2026-10-13 15:13:43'),
+(6, 1, 'SALIDA', '11:13:00', NULL, '2026-10-13', 'NORMAL', 1, '2026-10-13 15:13:46', '2026-10-13 15:13:46'),
+(7, 1, 'INGRESO', '11:14:00', NULL, '2026-10-13', 'NORMAL', 1, '2026-10-13 15:14:32', '2026-10-13 15:14:32'),
+(8, 1, 'SALIDA', '11:14:00', NULL, '2026-10-13', 'NORMAL', 1, '2026-10-13 15:14:47', '2026-10-13 15:14:47'),
+(9, 2, 'INGRESO', '11:16:00', NULL, '2026-10-13', 'NORMAL', 1, '2026-10-13 15:16:57', '2026-10-13 15:16:57'),
+(10, 2, 'SALIDA', '11:17:00', NULL, '2026-10-13', 'NORMAL', 1, '2026-10-13 15:17:23', '2026-10-13 15:17:23'),
+(11, 1, 'INGRESO', '11:20:00', NULL, '2026-10-13', 'NORMAL', 1, '2026-10-13 15:20:56', '2026-10-13 15:20:56'),
+(12, 1, 'SALIDA', '11:21:00', NULL, '2026-10-13', 'NORMAL', 1, '2026-10-13 15:21:11', '2026-10-13 15:21:11'),
+(13, 2, 'INGRESO', '11:24:00', NULL, '2026-10-13', 'NORMAL', 1, '2026-10-13 15:24:03', '2026-10-13 15:24:03'),
+(14, 2, 'SALIDA', '11:24:00', NULL, '2026-10-13', 'NORMAL', 1, '2026-10-13 15:24:20', '2026-10-13 15:24:20');
 
 -- --------------------------------------------------------
 
@@ -200,7 +248,19 @@ INSERT INTO `log_seguimientos` (`id`, `user_id`, `accion`, `descripcion`, `modul
 (22, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UNA SECCIÓN', 'SECCIONES', '2026-10-12', '11:07:50', '2026-10-12 15:07:50', '2026-10-12 15:07:50'),
 (23, 1, 'ELIMINACIÓN', 'EL USUARIO admin ELIMINÓ UNA SECCIÓN', 'SECCIONES', '2026-10-12', '11:09:45', '2026-10-12 15:09:45', '2026-10-12 15:09:45'),
 (24, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UNA NUEVA SECCIÓN', 'SECCIONES', '2026-10-12', '11:10:25', '2026-10-12 15:10:25', '2026-10-12 15:10:25'),
-(25, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN INGRESO/SALIDA', 'INGRESOS Y SALIDAS', '2026-10-12', '11:26:50', '2026-10-12 15:26:50', '2026-10-12 15:26:50');
+(25, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN INGRESO/SALIDA', 'INGRESOS Y SALIDAS', '2026-10-12', '11:26:50', '2026-10-12 15:26:50', '2026-10-12 15:26:50'),
+(26, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN INGRESO/SALIDA', 'INGRESOS Y SALIDAS', '2026-10-13', '10:25:37', '2026-10-13 14:25:37', '2026-10-13 14:25:37'),
+(27, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN INGRESO/SALIDA', 'INGRESOS Y SALIDAS', '2026-10-13', '10:29:36', '2026-10-13 14:29:36', '2026-10-13 14:29:36'),
+(28, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN INGRESO/SALIDA', 'INGRESOS Y SALIDAS', '2026-10-13', '10:31:44', '2026-10-13 14:31:44', '2026-10-13 14:31:44'),
+(29, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN INGRESO/SALIDA', 'INGRESOS Y SALIDAS', '2026-10-13', '10:42:07', '2026-10-13 14:42:07', '2026-10-13 14:42:07'),
+(30, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN INGRESO/SALIDA', 'INGRESOS Y SALIDAS', '2026-10-13', '10:45:02', '2026-10-13 14:45:02', '2026-10-13 14:45:02'),
+(31, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-13', '11:23:01', '2026-10-13 15:23:01', '2026-10-13 15:23:01'),
+(32, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-13', '11:23:08', '2026-10-13 15:23:08', '2026-10-13 15:23:08'),
+(33, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-13', '11:23:15', '2026-10-13 15:23:15', '2026-10-13 15:23:15'),
+(34, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-13', '11:23:20', '2026-10-13 15:23:20', '2026-10-13 15:23:20'),
+(35, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-13', '11:23:24', '2026-10-13 15:23:24', '2026-10-13 15:23:24'),
+(36, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-13', '11:23:32', '2026-10-13 15:23:32', '2026-10-13 15:23:32'),
+(37, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-13', '11:24:33', '2026-10-13 15:24:33', '2026-10-13 15:24:33');
 
 -- --------------------------------------------------------
 
@@ -223,10 +283,10 @@ CREATE TABLE `mapeos` (
 --
 
 INSERT INTO `mapeos` (`id`, `nom`, `ubicacion_id`, `ocupado`, `vehiculo_id`, `created_at`, `updated_at`) VALUES
-(1, 'A', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-12 15:26:34'),
-(2, 'B', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-12 15:10:24'),
-(3, 'C', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-12 15:10:24'),
-(4, 'D', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-12 15:10:24'),
+(1, 'A', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-13 15:24:20'),
+(2, 'B', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-13 14:26:14'),
+(3, 'C', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-13 14:42:16'),
+(4, 'D', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-13 14:31:53'),
 (5, 'E', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-12 15:10:24'),
 (6, 'F', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-12 15:10:24'),
 (7, 'G', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-12 15:10:24'),
@@ -306,6 +366,40 @@ CREATE TABLE `notificacion_usuarios` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `notificacion_usuarios`
+--
+
+INSERT INTO `notificacion_usuarios` (`id`, `ingresoSalida_id`, `hora`, `fecha`, `user_id`, `visto`, `created_at`, `updated_at`) VALUES
+(1, 1, '10:41:00', '2026-10-13', 1, 1, '2026-10-13 14:42:07', '2026-10-13 15:14:07'),
+(2, 1, '10:41:00', '2026-10-13', 2, 1, '2026-10-13 14:42:07', '2026-10-13 15:21:18'),
+(3, 2, '10:42:00', '2026-10-13', 1, 1, '2026-10-13 14:42:16', '2026-10-13 15:14:07'),
+(4, 2, '10:42:00', '2026-10-13', 2, 1, '2026-10-13 14:42:16', '2026-10-13 15:21:18'),
+(5, 3, '10:44:00', '2026-10-13', 1, 1, '2026-10-13 14:45:02', '2026-10-13 15:14:07'),
+(6, 3, '10:44:00', '2026-10-13', 2, 1, '2026-10-13 14:45:02', '2026-10-13 15:21:18'),
+(7, 4, '10:45:00', '2026-10-13', 1, 1, '2026-10-13 14:45:09', '2026-10-13 15:14:07'),
+(8, 4, '10:45:00', '2026-10-13', 2, 1, '2026-10-13 14:45:09', '2026-10-13 15:21:18'),
+(9, 5, '11:13:00', '2026-10-13', 1, 1, '2026-10-13 15:13:43', '2026-10-13 15:14:07'),
+(10, 5, '11:13:00', '2026-10-13', 2, 1, '2026-10-13 15:13:43', '2026-10-13 15:21:18'),
+(11, 6, '11:13:00', '2026-10-13', 1, 1, '2026-10-13 15:13:46', '2026-10-13 15:14:07'),
+(12, 6, '11:13:00', '2026-10-13', 2, 1, '2026-10-13 15:13:46', '2026-10-13 15:21:18'),
+(13, 7, '11:14:00', '2026-10-13', 1, 0, '2026-10-13 15:14:32', '2026-10-13 15:14:32'),
+(14, 7, '11:14:00', '2026-10-13', 2, 1, '2026-10-13 15:14:32', '2026-10-13 15:21:18'),
+(15, 8, '11:14:00', '2026-10-13', 1, 0, '2026-10-13 15:14:47', '2026-10-13 15:14:47'),
+(16, 8, '11:14:00', '2026-10-13', 2, 1, '2026-10-13 15:14:47', '2026-10-13 15:21:18'),
+(17, 9, '11:16:00', '2026-10-13', 1, 0, '2026-10-13 15:16:57', '2026-10-13 15:16:57'),
+(18, 9, '11:16:00', '2026-10-13', 2, 1, '2026-10-13 15:16:57', '2026-10-13 15:21:18'),
+(19, 10, '11:17:00', '2026-10-13', 1, 0, '2026-10-13 15:17:23', '2026-10-13 15:17:23'),
+(20, 10, '11:17:00', '2026-10-13', 2, 1, '2026-10-13 15:17:23', '2026-10-13 15:21:18'),
+(21, 11, '11:20:00', '2026-10-13', 1, 0, '2026-10-13 15:20:56', '2026-10-13 15:20:56'),
+(22, 11, '11:20:00', '2026-10-13', 2, 1, '2026-10-13 15:20:56', '2026-10-13 15:21:18'),
+(23, 12, '11:21:00', '2026-10-13', 1, 0, '2026-10-13 15:21:11', '2026-10-13 15:21:11'),
+(24, 12, '11:21:00', '2026-10-13', 2, 1, '2026-10-13 15:21:11', '2026-10-13 15:21:18'),
+(25, 13, '11:24:00', '2026-10-13', 1, 0, '2026-10-13 15:24:03', '2026-10-13 15:24:03'),
+(26, 13, '11:24:00', '2026-10-13', 2, 0, '2026-10-13 15:24:03', '2026-10-13 15:24:03'),
+(27, 14, '11:24:00', '2026-10-13', 1, 0, '2026-10-13 15:24:20', '2026-10-13 15:24:20'),
+(28, 14, '11:24:00', '2026-10-13', 2, 0, '2026-10-13 15:24:20', '2026-10-13 15:24:20');
 
 -- --------------------------------------------------------
 
@@ -422,6 +516,19 @@ CREATE TABLE `salidas` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `salidas`
+--
+
+INSERT INTO `salidas` (`id`, `salida_id`, `cobrado`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, '2026-10-13 14:42:16', '2026-10-13 15:23:01'),
+(2, 4, 1, '2026-10-13 14:45:10', '2026-10-13 15:23:08'),
+(3, 6, 1, '2026-10-13 15:13:46', '2026-10-13 15:23:15'),
+(4, 8, 1, '2026-10-13 15:14:47', '2026-10-13 15:23:20'),
+(5, 10, 1, '2026-10-13 15:17:23', '2026-10-13 15:23:24'),
+(6, 12, 1, '2026-10-13 15:21:11', '2026-10-13 15:23:32'),
+(7, 14, 1, '2026-10-13 15:24:20', '2026-10-13 15:24:33');
+
 -- --------------------------------------------------------
 
 --
@@ -501,7 +608,7 @@ CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo` enum('ADMINISTRADOR','AUXILIAR') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo` enum('ADMINISTRADOR','AUXILIAR','CONTROL') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `foto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -514,7 +621,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `password`, `tipo`, `foto`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'admin', '$2y$12$RomXeiiYajoMy0i6aKwI6O98RZVkmChVKZFm8D73mNXdegRFjsdqC', 'ADMINISTRADOR', 'user_default.png', 1, '2022-09-16 23:16:26', '2026-10-11 15:30:28'),
-(2, 'JPERES', '$2y$12$.kzvXCQ2jZmuNe6mw8lL7ux81A32FsPoT0lXUKUD8f1W.emsec.H6', 'AUXILIAR', 'user_default.png', 1, '2026-10-12 14:14:05', '2026-10-12 14:20:11');
+(2, 'JPERES', '$2y$12$.kzvXCQ2jZmuNe6mw8lL7ux81A32FsPoT0lXUKUD8f1W.emsec.H6', 'AUXILIAR', 'user_default.png', 1, '2026-10-12 14:14:05', '2026-10-12 14:20:11'),
+(3, 'CONTROL1', '$2y$12$d6lvSSI6R4IDX4kj76cwVuH0pjqoqA5pY2oY2tszO0FqKUC.0mlo.', 'CONTROL', 'user_default.png', 1, '2026-10-13 15:09:28', '2026-10-13 15:09:28');
 
 -- --------------------------------------------------------
 
@@ -556,7 +664,8 @@ INSERT INTO `user_permisos` (`id`, `user_id`, `permiso_id`, `created_at`, `updat
 (19, 2, 29, '2026-10-12 14:14:05', '2026-10-12 14:14:05'),
 (20, 2, 30, '2026-10-12 14:14:05', '2026-10-12 14:14:05'),
 (21, 2, 31, '2026-10-12 14:14:05', '2026-10-12 14:14:05'),
-(22, 2, 34, '2026-10-12 14:14:05', '2026-10-12 14:14:05');
+(22, 2, 34, '2026-10-12 14:14:05', '2026-10-12 14:14:05'),
+(23, 2, 27, '2026-10-13 15:22:32', '2026-10-13 15:22:32');
 
 -- --------------------------------------------------------
 
@@ -726,7 +835,7 @@ ALTER TABLE `vehiculos`
 -- AUTO_INCREMENT de la tabla `cobros`
 --
 ALTER TABLE `cobros`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `datos_usuarios`
@@ -744,19 +853,19 @@ ALTER TABLE `empresas`
 -- AUTO_INCREMENT de la tabla `facturas`
 --
 ALTER TABLE `facturas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `ingreso_salidas`
 --
 ALTER TABLE `ingreso_salidas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `log_seguimientos`
 --
 ALTER TABLE `log_seguimientos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `mapeos`
@@ -774,7 +883,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `notificacion_usuarios`
 --
 ALTER TABLE `notificacion_usuarios`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `pendientes`
@@ -798,7 +907,7 @@ ALTER TABLE `propietarios`
 -- AUTO_INCREMENT de la tabla `salidas`
 --
 ALTER TABLE `salidas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `tarifas`
@@ -822,13 +931,13 @@ ALTER TABLE `ubicacions`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `user_permisos`
 --
 ALTER TABLE `user_permisos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `vehiculos`

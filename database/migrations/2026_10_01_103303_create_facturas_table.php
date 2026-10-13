@@ -16,6 +16,8 @@ class CreateFacturasTable extends Migration
         Schema::create('facturas', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('cobro_id')->unsigned();
+            $table->string("a_nombre");
+            $table->string("nit");
             $table->bigInteger('nro_factura');
             $table->string('codigo_control', 255);
             $table->string('qr', 255);

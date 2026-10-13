@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Tarifas</title>
-    <link rel="stylesheet" href="{{asset('css/reportes.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/reportes.css') }}">
     <style type="text/css">
-        table{
+        @page {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .logo img {
+            height: 130px;
+        }
+
+        table {
             width: 100%;
             border-collapse: collapse;
             table-layout: fixed;
-            margin-top:20px;
+            margin-top: 20px;
         }
 
-        table thead tr th, tbody tr td{
+        table thead tr th,
+        tbody tr td {
             text-align: center;
             font-size: 0.63em;
         }
-    
-        table thead tr th{
+
+        table thead tr th {
             font-size: 0.8em;
         }
     </style>
 </head>
+
 <body>
     <div class="encabezado">
         <div class="logo">
-            <img src="{{ asset('imgs/empresa/'.$empresa->logo) }}">
+            <img src="{{ $empresa->logo_b64 }}">
         </div>
         <h2 class="titulo">
             {{ $empresa->name }}
@@ -45,26 +56,27 @@
             </tr>
         </thead>
         <tbody>
-        @if(count($tarifas)>0)
-            @php   
-                $contador = 1;
-            @endphp
-            @foreach($tarifas as $key => $value)
-            <tr>
-                <td>{{ $contador++ }}</td>
-                <td class="izquierda">{{ $value->nom }}</td>
-                <td>{{ $value->horas }}</td>
-                <td>{{ $value->precio }}</td>
-                <td>{{ $value->fecha_reg }}</td>
-                <td>{{ $value->descripcion }}</td>
-            </tr>
-            @endforeach
-        @else
-            <tr>
-                <td colspan="6">NO SE ENCONTRARON REGISTROS</td>
-            </tr>
-        @endif
+            @if (count($tarifas) > 0)
+                @php
+                    $contador = 1;
+                @endphp
+                @foreach ($tarifas as $key => $value)
+                    <tr>
+                        <td>{{ $contador++ }}</td>
+                        <td class="izquierda">{{ $value->nom }}</td>
+                        <td>{{ $value->horas }}</td>
+                        <td>{{ $value->precio }}</td>
+                        <td>{{ $value->fecha_reg }}</td>
+                        <td>{{ $value->descripcion }}</td>
+                    </tr>
+                @endforeach
+            @else
+                <tr>
+                    <td colspan="6">NO SE ENCONTRARON REGISTROS</td>
+                </tr>
+            @endif
         </tbody>
     </table>
 </body>
+
 </html>
