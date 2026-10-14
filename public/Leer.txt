@@ -1,0 +1,6 @@
+COMANDOS CREADOS EN LARAVEL PARA EL USO DE AGENTE INTELIGENTE
+=============================================================
+php artisan schedule:list   => lista los comandos
+ 
+	 php artisan agente:salidas-mensuales
+	 php artisan agente:espacios-disponibles

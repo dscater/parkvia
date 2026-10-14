@@ -27,10 +27,15 @@ class PendienteController extends Controller
 
     public function store(Request $request)
     {
-        Pendiente::create([
-            'rfid' => $request->rfid,
-            'registrado' => 'NO'
-        ]);
+        $existe = Pendiente::where("rfid", $request->rfid)
+            ->where("registrado", "NO")
+            ->get()->first();
+        if (!$existe) {
+            Pendiente::create([
+                'rfid' => $request->rfid,
+                'registrado' => 'NO'
+            ]);
+        }
 
         return response()->JSON(true);
     }

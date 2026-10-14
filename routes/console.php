@@ -1,8 +1,13 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schedule;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+Schedule::command('agente:salidas-mensuales')
+    ->dailyAt('08:00')
+    ->timezone('America/La_Paz')
+    ->withoutOverlapping();
+
+Schedule::command('agente:espacios-disponibles')
+    ->hourly()
+    ->timezone('America/La_Paz')
+    ->withoutOverlapping();

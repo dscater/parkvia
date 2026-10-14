@@ -17,6 +17,7 @@ use App\Models\Mapeo;
 use App\Models\Salida;
 use App\Models\Ubicacion;
 use App\Models\LogSeguimiento;
+use App\Services\EnviarCorreoService;
 use Exception;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,8 @@ use Illuminate\Support\Facades\Mail;
 
 class IngresoSalidaController extends Controller
 {
+    public function __construct(private EnviarCorreoService  $enviar_correo_service) {}
+
     public function index(Request $request)
     {
         $empresa = Empresa::first();
@@ -194,7 +197,7 @@ class IngresoSalidaController extends Controller
                     $cobro_salida->cobrado = 0;
                     $cobro_salida->save();
 
-                    self::enviarCorreo($ingreso_salida, $request->vehiculo_id, "INGRESO");
+                    $this->enviar_correo_service->correoIngresoSalida($ingreso_salida, $request->vehiculo_id, "INGRESO");
 
                     DB::commit();
                     return response()->json([
@@ -202,7 +205,7 @@ class IngresoSalidaController extends Controller
                     ]);
                 }
             }
-
+            $cobro = null;
             if ($request->accion == 'SALIDA') {
                 $mapeo = Mapeo::where('vehiculo_id', $ingreso_salida->vehiculo->id)->get()->first();
                 if ($mapeo) {
@@ -288,8 +291,15 @@ class IngresoSalidaController extends Controller
                     $nueva_salida->save();
                 }
 
+                if (!$cobro) {
+                    throw new Exception("No se pudo crear el cobro, intente mas tarde por favor");
+                }
+                // enviar correo cobro si existe
+                $this->enviar_correo_service->correoCobro($ingreso_salida, $ingreso_salida->vehiculo_id, $cobro);
+
+
                 if ($request->ajax()) {
-                    self::enviarCorreo($ingreso_salida, $request->vehiculo_id, "SALIDA");
+                    $this->enviar_correo_service->correoIngresoSalida($ingreso_salida, $request->vehiculo_id, "SALIDA");
                     DB::commit();
                     return response()->json([
                         'msg' => 'salida'
@@ -464,6 +474,7 @@ class IngresoSalidaController extends Controller
     {
         DB::beginTransaction();
         try {
+            Log::debug($request);
             $vehiculo = Vehiculo::where('rfid', $request->rfid)->get()->first();
 
             if ($vehiculo) {
@@ -578,7 +589,7 @@ class IngresoSalidaController extends Controller
                             }
 
                             if ($accion_historico == 'INGRESO' && $mapeo->ocupado == 1 && $mapeo->vehiculo_id == $vehiculo->id) {
-                                self::enviarCorreo($ingreso_salida, $vehiculo->id, $accion);
+                                $this->enviar_correo_service->correoIngresoSalida($ingreso_salida, $vehiculo->id, $accion);
                                 DB::commit();
                                 return response()->JSON([
                                     'msg' => 'bien',
@@ -589,7 +600,7 @@ class IngresoSalidaController extends Controller
                                     'accion' => 'INGRESO HISTORICO'
                                 ]);
                             }
-                            self::enviarCorreo($ingreso_salida, $vehiculo->id, $accion);
+                            $this->enviar_correo_service->correoIngresoSalida($ingreso_salida, $vehiculo->id, $accion);
                             DB::commit();
                             return response()->JSON([
                                 'msg' => 'bien',
@@ -599,7 +610,11 @@ class IngresoSalidaController extends Controller
                                 'accion' => 'SALIDA MENSUAL'
                             ]);
                         } else {
-                            self::enviarCorreo($ingreso_salida, $vehiculo->id, $accion);
+                            // PRIMER INGRESO MENSUAL
+                            // EL USUARIO SELECCION y LUGAR DESDE LA INTERFAZ DE CONTROL
+                            // Log::debug("ENTRARIA AQUI");
+                            // AQUI NO ES NECESARIO ENVIAR CORREO
+                            // $this->enviar_correo_service->correoIngresoSalida($ingreso_salida, $vehiculo->id, $accion);
                             $modal = 'modal2';
 
                             DB::commit();
@@ -653,7 +668,7 @@ class IngresoSalidaController extends Controller
                             $notificacion->save();
                         }
 
-                        self::enviarCorreo($ingreso_salida, $vehiculo->id, $accion);
+                        $this->enviar_correo_service->correoIngresoSalida($ingreso_salida, $vehiculo->id, $accion);
                         $modal = 'modal1';
                         DB::commit();
                         return response()->JSON([
@@ -667,7 +682,7 @@ class IngresoSalidaController extends Controller
                     }
                 }
 
-                self::enviarCorreo($ingreso_salida, $vehiculo->id, $accion);
+                $this->enviar_correo_service->correoIngresoSalida($ingreso_salida, $vehiculo->id, $accion);
                 DB::commit();
                 return response()->JSON([
                     'msg' => 'bien',
@@ -700,6 +715,4 @@ class IngresoSalidaController extends Controller
             return redirect()->back(500)->with("error", "Error inesperado, intente mas tarde");
         }
     }
-
-    public static function registraIngresoSalidaMensual(Vehiculo $vehiculo) {}
 }

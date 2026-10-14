@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 13-10-2026 a las 15:25:31
+-- Tiempo de generación: 14-10-2026 a las 21:34:00
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.2.22
 
@@ -20,6 +20,22 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `parkvia_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `agente_notificacions`
+--
+
+CREATE TABLE `agente_notificacions` (
+  `id` bigint UNSIGNED NOT NULL,
+  `clave` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `datos` json DEFAULT NULL,
+  `enviado_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -54,7 +70,14 @@ INSERT INTO `cobros` (`id`, `salida_id`, `vehiculo_id`, `tarifa_id`, `tiempo_cob
 (4, 8, 1, 1, 1, '2026-10-13', '11:14:00', '11:14:00', '2026-10-13', 40.00, 1, '2026-10-13 15:14:47', '2026-10-13 15:14:47'),
 (5, 10, 2, 1, 1, '2026-10-13', '11:17:00', '11:16:00', '2026-10-13', 40.00, 1, '2026-10-13 15:17:23', '2026-10-13 15:17:23'),
 (6, 12, 1, 1, 1, '2026-10-13', '11:21:00', '11:20:00', '2026-10-13', 40.00, 1, '2026-10-13 15:21:11', '2026-10-13 15:21:11'),
-(7, 14, 2, 1, 1, '2026-10-13', '11:24:00', '11:24:00', '2026-10-13', 40.00, 1, '2026-10-13 15:24:20', '2026-10-13 15:24:20');
+(7, 14, 2, 1, 1, '2026-10-13', '11:24:00', '11:24:00', '2026-10-13', 40.00, 1, '2026-10-13 15:24:20', '2026-10-13 15:24:20'),
+(8, 18, 1, 1, 1, '2026-10-14', '16:08:00', '16:05:00', '2026-10-14', 40.00, 1, '2026-10-14 20:08:23', '2026-10-14 20:08:23'),
+(9, 20, 1, 1, 1, '2026-10-14', '16:13:00', '16:11:00', '2026-10-14', 40.00, 1, '2026-10-14 20:13:49', '2026-10-14 20:13:49'),
+(10, 22, 1, 1, 1, '2026-10-14', '16:35:00', '16:14:00', '2026-10-14', 40.00, 1, '2026-10-14 20:35:23', '2026-10-14 20:35:23'),
+(11, 24, 1, 1, 1, '2026-10-14', '16:39:00', '16:37:00', '2026-10-14', 40.00, 1, '2026-10-14 20:39:55', '2026-10-14 20:39:55'),
+(12, 26, 1, 1, 1, '2026-10-14', '17:11:00', '16:53:00', '2026-10-14', 40.00, 1, '2026-10-14 21:11:19', '2026-10-14 21:11:19'),
+(13, 28, 3, 2, 672, '2026-10-14', '17:15:00', '17:15:00', '2026-10-14', 3300.00, 1, '2026-10-14 21:15:13', '2026-10-14 21:15:13'),
+(14, 34, 4, 2, 672, '2026-10-14', '17:24:00', '17:23:00', '2026-10-14', 3300.00, 1, '2026-10-14 21:24:54', '2026-10-14 21:24:54');
 
 -- --------------------------------------------------------
 
@@ -134,8 +157,8 @@ INSERT INTO `empresas` (`id`, `cod`, `nit`, `nro_aut`, `nro_emp`, `name`, `alias
 CREATE TABLE `facturas` (
   `id` bigint UNSIGNED NOT NULL,
   `cobro_id` bigint UNSIGNED NOT NULL,
-  `a_nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nit` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `a_nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nit` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `nro_factura` bigint NOT NULL,
   `codigo_control` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `qr` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -160,7 +183,14 @@ INSERT INTO `facturas` (`id`, `cobro_id`, `a_nombre`, `nit`, `nro_factura`, `cod
 (4, 4, 'GONZALES', '234234234', 10004, '26-56-73-79-3E', '10004_1791904487.png', 40.00, '2026-10-13', '11:14:00', '2027-04-13', 1, '', '2026-10-13 15:14:47', '2026-10-13 15:14:47'),
 (5, 5, 'GONZALES', '234234234', 10005, '94-96-85-65-FB', '10005_1791904643.png', 40.00, '2026-10-13', '11:17:00', '2027-04-13', 1, '', '2026-10-13 15:17:23', '2026-10-13 15:17:23'),
 (6, 6, 'GONZALES', '234234234', 10006, 'A7-32-D4-87-E9', '10006_1791904871.png', 40.00, '2026-10-13', '11:21:00', '2027-04-13', 1, '', '2026-10-13 15:21:11', '2026-10-13 15:21:11'),
-(7, 7, 'ERIC GONZALES', '234234234', 10007, '63-CE-82-89-81', '10007_1791905060.png', 40.00, '2026-10-13', '11:24:00', '2027-04-13', 1, '', '2026-10-13 15:24:20', '2026-10-13 15:24:33');
+(7, 7, 'ERIC GONZALES', '234234234', 10007, '63-CE-82-89-81', '10007_1791905060.png', 40.00, '2026-10-13', '11:24:00', '2027-04-13', 1, '', '2026-10-13 15:24:20', '2026-10-13 15:24:33'),
+(8, 8, 'GONZALES', '234234234', 10008, '34-CB-8A-E2-72', '10008_1792008503.png', 40.00, '2026-10-14', '16:08:00', '2027-04-14', 1, '', '2026-10-14 20:08:23', '2026-10-14 20:08:23'),
+(9, 9, 'GONZALES', '234234234', 10009, '44-B2-D2-BB-B9', '10009_1792008829.png', 40.00, '2026-10-14', '16:13:00', '2027-04-14', 1, '', '2026-10-14 20:13:49', '2026-10-14 20:13:49'),
+(10, 10, 'GONZALES', '234234234', 10010, 'BA-D7-23-81-8F', '10010_1792010123.png', 40.00, '2026-10-14', '16:35:00', '2027-04-14', 1, '', '2026-10-14 20:35:23', '2026-10-14 20:35:23'),
+(11, 11, 'GONZALES', '234234234', 10011, '26-93-4A-96-D2', '10011_1792010395.png', 40.00, '2026-10-14', '16:39:00', '2027-04-14', 1, '', '2026-10-14 20:39:55', '2026-10-14 20:39:55'),
+(12, 12, 'GONZALES', '234234234', 10012, '3F-D4-12-23-53', '10012_1792012279.png', 40.00, '2026-10-14', '17:11:00', '2027-04-14', 1, '', '2026-10-14 21:11:19', '2026-10-14 21:11:19'),
+(13, 13, 'PERES', '324234234', 10013, 'BE-AA-F1-E9-91', '10013_1792012513.png', 3300.00, '2026-10-14', '17:15:00', '2027-04-14', 1, 'COBRO ANTICIPADO POR PARQUEO DE 672 HORAS O MAS', '2026-10-14 21:15:13', '2026-10-14 21:15:13'),
+(14, 14, 'PERES', '324234234', 10014, '2A-E1-58-EF-44', '10014_1792013094.png', 3300.00, '2026-10-14', '17:24:00', '2027-04-14', 1, 'COBRO ANTICIPADO POR PARQUEO DE 672 HORAS O MAS', '2026-10-14 21:24:54', '2026-10-14 21:24:54');
 
 -- --------------------------------------------------------
 
@@ -199,7 +229,25 @@ INSERT INTO `ingreso_salidas` (`id`, `vehiculo_id`, `accion`, `hora`, `observaci
 (11, 1, 'INGRESO', '11:20:00', NULL, '2026-10-13', 'NORMAL', 1, '2026-10-13 15:20:56', '2026-10-13 15:20:56'),
 (12, 1, 'SALIDA', '11:21:00', NULL, '2026-10-13', 'NORMAL', 1, '2026-10-13 15:21:11', '2026-10-13 15:21:11'),
 (13, 2, 'INGRESO', '11:24:00', NULL, '2026-10-13', 'NORMAL', 1, '2026-10-13 15:24:03', '2026-10-13 15:24:03'),
-(14, 2, 'SALIDA', '11:24:00', NULL, '2026-10-13', 'NORMAL', 1, '2026-10-13 15:24:20', '2026-10-13 15:24:20');
+(14, 2, 'SALIDA', '11:24:00', NULL, '2026-10-13', 'NORMAL', 1, '2026-10-13 15:24:20', '2026-10-13 15:24:20'),
+(17, 1, 'INGRESO', '16:05:00', NULL, '2026-10-14', 'NORMAL', 1, '2026-10-14 20:05:58', '2026-10-14 20:05:58'),
+(18, 1, 'SALIDA', '16:08:00', NULL, '2026-10-14', 'NORMAL', 1, '2026-10-14 20:08:23', '2026-10-14 20:08:23'),
+(19, 1, 'INGRESO', '16:11:00', NULL, '2026-10-14', 'NORMAL', 1, '2026-10-14 20:11:21', '2026-10-14 20:11:21'),
+(20, 1, 'SALIDA', '16:13:00', NULL, '2026-10-14', 'NORMAL', 1, '2026-10-14 20:13:49', '2026-10-14 20:13:49'),
+(21, 1, 'INGRESO', '16:14:00', NULL, '2026-10-14', 'NORMAL', 1, '2026-10-14 20:14:54', '2026-10-14 20:14:54'),
+(22, 1, 'SALIDA', '16:35:00', NULL, '2026-10-14', 'NORMAL', 1, '2026-10-14 20:35:23', '2026-10-14 20:35:23'),
+(23, 1, 'INGRESO', '16:37:00', NULL, '2026-10-14', 'NORMAL', 1, '2026-10-14 20:37:59', '2026-10-14 20:37:59'),
+(24, 1, 'SALIDA', '16:39:00', NULL, '2026-10-14', 'NORMAL', 1, '2026-10-14 20:39:55', '2026-10-14 20:39:55'),
+(25, 1, 'INGRESO', '16:53:00', NULL, '2026-10-14', 'NORMAL', 1, '2026-10-14 20:53:21', '2026-10-14 20:53:21'),
+(26, 1, 'SALIDA', '17:11:00', NULL, '2026-10-14', 'NORMAL', 1, '2026-10-14 21:11:19', '2026-10-14 21:11:19'),
+(27, 3, 'INGRESO', '17:15:00', NULL, '2026-10-14', 'INGRESO MENSUAL', 1, '2026-10-14 21:15:13', '2026-10-14 21:15:13'),
+(28, 3, 'SALIDA', '17:15:00', NULL, '2026-11-11', 'SALIDA MENSUAL', 1, '2026-10-14 21:15:13', '2026-10-14 21:15:13'),
+(29, 3, 'SALIDA', '17:21:00', NULL, '2026-10-14', 'HISTORICO', 1, '2026-10-14 21:21:24', '2026-10-14 21:21:24'),
+(30, 3, 'INGRESO', '17:21:00', NULL, '2026-10-14', 'HISTORICO', 1, '2026-10-14 21:21:45', '2026-10-14 21:21:45'),
+(31, 3, 'SALIDA', '17:22:00', NULL, '2026-10-14', 'HISTORICO', 1, '2026-10-14 21:22:05', '2026-10-14 21:22:05'),
+(32, 3, 'INGRESO', '17:22:00', NULL, '2026-10-14', 'HISTORICO', 1, '2026-10-14 21:22:31', '2026-10-14 21:22:31'),
+(33, 4, 'INGRESO', '17:23:00', NULL, '2026-10-14', 'INGRESO MENSUAL', 1, '2026-10-14 21:24:54', '2026-10-14 21:24:54'),
+(34, 4, 'SALIDA', '17:24:00', NULL, '2026-11-11', 'SALIDA MENSUAL', 1, '2026-10-14 21:24:54', '2026-10-14 21:24:54');
 
 -- --------------------------------------------------------
 
@@ -260,7 +308,20 @@ INSERT INTO `log_seguimientos` (`id`, `user_id`, `accion`, `descripcion`, `modul
 (34, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-13', '11:23:20', '2026-10-13 15:23:20', '2026-10-13 15:23:20'),
 (35, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-13', '11:23:24', '2026-10-13 15:23:24', '2026-10-13 15:23:24'),
 (36, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-13', '11:23:32', '2026-10-13 15:23:32', '2026-10-13 15:23:32'),
-(37, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-13', '11:24:33', '2026-10-13 15:24:33', '2026-10-13 15:24:33');
+(37, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-13', '11:24:33', '2026-10-13 15:24:33', '2026-10-13 15:24:33'),
+(38, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN REGISTRO PROPIETARIO', 'PROPIETARIOS', '2026-10-14', '16:04:24', '2026-10-14 20:04:24', '2026-10-14 20:04:24'),
+(39, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN REGISTRO PROPIETARIO', 'PROPIETARIOS', '2026-10-14', '16:04:47', '2026-10-14 20:04:47', '2026-10-14 20:04:47'),
+(40, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-14', '16:47:03', '2026-10-14 20:47:03', '2026-10-14 20:47:03'),
+(41, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-14', '16:48:57', '2026-10-14 20:48:57', '2026-10-14 20:48:57'),
+(42, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-14', '16:53:31', '2026-10-14 20:53:31', '2026-10-14 20:53:31'),
+(43, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-14', '16:54:19', '2026-10-14 20:54:19', '2026-10-14 20:54:19'),
+(44, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UNA NUEVA TARIFA', 'TARIFAS', '2026-10-14', '16:58:12', '2026-10-14 20:58:12', '2026-10-14 20:58:12'),
+(45, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRÓ UN NUEVO PROPIETARIO', 'PROPIETARIOS', '2026-10-14', '16:58:33', '2026-10-14 20:58:33', '2026-10-14 20:58:33'),
+(46, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN VEHICULO', 'VEHICULOS', '2026-10-14', '16:59:05', '2026-10-14 20:59:05', '2026-10-14 20:59:05'),
+(47, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-14', '17:11:46', '2026-10-14 21:11:46', '2026-10-14 21:11:46'),
+(48, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-14', '17:20:46', '2026-10-14 21:20:46', '2026-10-14 21:20:46'),
+(49, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN VEHICULO', 'VEHICULOS', '2026-10-14', '17:23:35', '2026-10-14 21:23:35', '2026-10-14 21:23:35'),
+(50, 2, 'CREACIÓN', 'EL USUARIO JPERES REGISTRO UN COBRO', 'COBROS', '2026-10-14', '17:25:26', '2026-10-14 21:25:26', '2026-10-14 21:25:26');
 
 -- --------------------------------------------------------
 
@@ -283,10 +344,10 @@ CREATE TABLE `mapeos` (
 --
 
 INSERT INTO `mapeos` (`id`, `nom`, `ubicacion_id`, `ocupado`, `vehiculo_id`, `created_at`, `updated_at`) VALUES
-(1, 'A', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-13 15:24:20'),
+(1, 'A', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-14 21:11:19'),
 (2, 'B', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-13 14:26:14'),
-(3, 'C', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-13 14:42:16'),
-(4, 'D', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-13 14:31:53'),
+(3, 'C', 1, 1, 4, '2026-10-12 15:10:24', '2026-10-14 21:24:54'),
+(4, 'D', 1, 1, 3, '2026-10-12 15:10:24', '2026-10-14 21:15:13'),
 (5, 'E', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-12 15:10:24'),
 (6, 'F', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-12 15:10:24'),
 (7, 'G', 1, 0, 0, '2026-10-12 15:10:24', '2026-10-12 15:10:24'),
@@ -348,7 +409,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (15, '2026_10_03_211403_create_pendientes_table', 1),
 (16, '2026_10_08_144916_create_log_seguimientos_table', 1),
 (17, '2026_10_08_171904_create_permisos_table', 1),
-(18, '2026_10_08_171918_create_user_permisos_table', 1);
+(18, '2026_10_08_171918_create_user_permisos_table', 1),
+(19, '2026_10_14_173330_create_agente_notificacions_table', 2);
 
 -- --------------------------------------------------------
 
@@ -399,7 +461,39 @@ INSERT INTO `notificacion_usuarios` (`id`, `ingresoSalida_id`, `hora`, `fecha`, 
 (25, 13, '11:24:00', '2026-10-13', 1, 0, '2026-10-13 15:24:03', '2026-10-13 15:24:03'),
 (26, 13, '11:24:00', '2026-10-13', 2, 0, '2026-10-13 15:24:03', '2026-10-13 15:24:03'),
 (27, 14, '11:24:00', '2026-10-13', 1, 0, '2026-10-13 15:24:20', '2026-10-13 15:24:20'),
-(28, 14, '11:24:00', '2026-10-13', 2, 0, '2026-10-13 15:24:20', '2026-10-13 15:24:20');
+(28, 14, '11:24:00', '2026-10-13', 2, 0, '2026-10-13 15:24:20', '2026-10-13 15:24:20'),
+(33, 17, '16:05:00', '2026-10-14', 1, 0, '2026-10-14 20:05:58', '2026-10-14 20:05:58'),
+(34, 17, '16:05:00', '2026-10-14', 2, 0, '2026-10-14 20:05:58', '2026-10-14 20:05:58'),
+(35, 18, '16:08:00', '2026-10-14', 1, 0, '2026-10-14 20:08:23', '2026-10-14 20:08:23'),
+(36, 18, '16:08:00', '2026-10-14', 2, 0, '2026-10-14 20:08:23', '2026-10-14 20:08:23'),
+(37, 19, '16:11:00', '2026-10-14', 1, 0, '2026-10-14 20:11:21', '2026-10-14 20:11:21'),
+(38, 19, '16:11:00', '2026-10-14', 2, 0, '2026-10-14 20:11:21', '2026-10-14 20:11:21'),
+(39, 20, '16:13:00', '2026-10-14', 1, 0, '2026-10-14 20:13:49', '2026-10-14 20:13:49'),
+(40, 20, '16:13:00', '2026-10-14', 2, 0, '2026-10-14 20:13:49', '2026-10-14 20:13:49'),
+(41, 21, '16:14:00', '2026-10-14', 1, 0, '2026-10-14 20:14:54', '2026-10-14 20:14:54'),
+(42, 21, '16:14:00', '2026-10-14', 2, 0, '2026-10-14 20:14:54', '2026-10-14 20:14:54'),
+(43, 22, '16:35:00', '2026-10-14', 1, 0, '2026-10-14 20:35:23', '2026-10-14 20:35:23'),
+(44, 22, '16:35:00', '2026-10-14', 2, 0, '2026-10-14 20:35:23', '2026-10-14 20:35:23'),
+(45, 23, '16:37:00', '2026-10-14', 1, 0, '2026-10-14 20:37:59', '2026-10-14 20:37:59'),
+(46, 23, '16:37:00', '2026-10-14', 2, 0, '2026-10-14 20:37:59', '2026-10-14 20:37:59'),
+(47, 24, '16:39:00', '2026-10-14', 1, 0, '2026-10-14 20:39:55', '2026-10-14 20:39:55'),
+(48, 24, '16:39:00', '2026-10-14', 2, 0, '2026-10-14 20:39:55', '2026-10-14 20:39:55'),
+(49, 25, '16:53:00', '2026-10-14', 1, 0, '2026-10-14 20:53:21', '2026-10-14 20:53:21'),
+(50, 25, '16:53:00', '2026-10-14', 2, 0, '2026-10-14 20:53:21', '2026-10-14 20:53:21'),
+(51, 26, '17:11:00', '2026-10-14', 1, 0, '2026-10-14 21:11:19', '2026-10-14 21:11:19'),
+(52, 26, '17:11:00', '2026-10-14', 2, 0, '2026-10-14 21:11:19', '2026-10-14 21:11:19'),
+(53, 27, '17:15:00', '2026-10-14', 1, 0, '2026-10-14 21:15:13', '2026-10-14 21:15:13'),
+(54, 27, '17:15:00', '2026-10-14', 2, 0, '2026-10-14 21:15:13', '2026-10-14 21:15:13'),
+(55, 29, '17:21:00', '2026-10-14', 1, 0, '2026-10-14 21:21:24', '2026-10-14 21:21:24'),
+(56, 29, '17:21:00', '2026-10-14', 2, 0, '2026-10-14 21:21:24', '2026-10-14 21:21:24'),
+(57, 30, '17:21:00', '2026-10-14', 1, 0, '2026-10-14 21:21:45', '2026-10-14 21:21:45'),
+(58, 30, '17:21:00', '2026-10-14', 2, 0, '2026-10-14 21:21:45', '2026-10-14 21:21:45'),
+(59, 31, '17:22:00', '2026-10-14', 1, 0, '2026-10-14 21:22:05', '2026-10-14 21:22:05'),
+(60, 31, '17:22:00', '2026-10-14', 2, 0, '2026-10-14 21:22:05', '2026-10-14 21:22:05'),
+(61, 32, '17:22:00', '2026-10-14', 1, 0, '2026-10-14 21:22:31', '2026-10-14 21:22:31'),
+(62, 32, '17:22:00', '2026-10-14', 2, 0, '2026-10-14 21:22:31', '2026-10-14 21:22:31'),
+(63, 33, '17:23:00', '2026-10-14', 1, 0, '2026-10-14 21:24:54', '2026-10-14 21:24:54'),
+(64, 33, '17:23:00', '2026-10-14', 2, 0, '2026-10-14 21:24:54', '2026-10-14 21:24:54');
 
 -- --------------------------------------------------------
 
@@ -500,7 +594,8 @@ CREATE TABLE `propietarios` (
 --
 
 INSERT INTO `propietarios` (`id`, `nom`, `apep`, `apem`, `ci`, `ci_exp`, `dir`, `fono`, `cel`, `correo`, `foto`, `fecha_reg`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'PEDRO', 'GONZALES', 'MAMANI', '234234234', 'LP', 'LOS OLIVOS #12312', '22222', '78787878', 'PEDROG@GMAIL.COM', 'GONZALESPEDRO1791815512.jpg', '2026-10-12', 1, '2026-10-12 14:31:52', '2026-10-12 14:34:44');
+(1, 'PEDRO', 'GONZALES', 'MAMANI', '234234234', 'LP', 'LOS OLIVOS #12312', '22222', '78787878', 'victorgonzalo.as@gmail.com', 'GONZALESPEDRO1791815512.jpg', '2026-10-12', 1, '2026-10-12 14:31:52', '2026-10-14 20:04:47'),
+(2, 'JUAN', 'PERES', 'MAMANI', '324234234', 'LP', 'LOS OLIVOS #12312', '', '', 'victorgonzalo.as@gmail.com', 'user_default.png', '2026-10-14', 1, '2026-10-14 20:58:33', '2026-10-14 20:58:33');
 
 -- --------------------------------------------------------
 
@@ -527,7 +622,14 @@ INSERT INTO `salidas` (`id`, `salida_id`, `cobrado`, `created_at`, `updated_at`)
 (4, 8, 1, '2026-10-13 15:14:47', '2026-10-13 15:23:20'),
 (5, 10, 1, '2026-10-13 15:17:23', '2026-10-13 15:23:24'),
 (6, 12, 1, '2026-10-13 15:21:11', '2026-10-13 15:23:32'),
-(7, 14, 1, '2026-10-13 15:24:20', '2026-10-13 15:24:33');
+(7, 14, 1, '2026-10-13 15:24:20', '2026-10-13 15:24:33'),
+(8, 18, 1, '2026-10-14 20:08:23', '2026-10-14 20:47:03'),
+(9, 20, 1, '2026-10-14 20:13:49', '2026-10-14 20:48:54'),
+(10, 22, 1, '2026-10-14 20:35:23', '2026-10-14 20:53:28'),
+(11, 24, 1, '2026-10-14 20:39:55', '2026-10-14 20:54:15'),
+(12, 26, 1, '2026-10-14 21:11:19', '2026-10-14 21:11:43'),
+(13, 28, 1, '2026-10-14 21:15:13', '2026-10-14 21:20:43'),
+(14, 34, 1, '2026-10-14 21:24:54', '2026-10-14 21:25:23');
 
 -- --------------------------------------------------------
 
@@ -551,7 +653,8 @@ CREATE TABLE `tarifas` (
 --
 
 INSERT INTO `tarifas` (`id`, `nom`, `horas`, `precio`, `fecha_reg`, `descripcion`, `created_at`, `updated_at`) VALUES
-(1, 'TARIFA 1', '1', 40.00, '2026-10-12', 'NUEVA DESC TARIFA 1', '2026-10-12 14:45:42', '2026-10-12 14:45:49');
+(1, 'TARIFA 1', '1', 40.00, '2026-10-12', 'NUEVA DESC TARIFA 1', '2026-10-12 14:45:42', '2026-10-12 14:45:49'),
+(2, 'MENSUAL', '672', 3300.00, '2026-10-14', '', '2026-10-14 20:58:12', '2026-10-14 20:58:12');
 
 -- --------------------------------------------------------
 
@@ -696,11 +799,20 @@ CREATE TABLE `vehiculos` (
 
 INSERT INTO `vehiculos` (`id`, `placa`, `marca`, `modelo`, `nom`, `tipo_id`, `propietario_id`, `tarifa_id`, `foto`, `rfid`, `fecha_reg`, `status`, `created_at`, `updated_at`) VALUES
 (1, '6576-WEQ', 'TOYOTA', 'MODELO', 'VEHICULO 1', 2, 1, 1, 'VEHICULO_16576-WEQ1791816615.webp', '123', '2026-10-12', 1, '2026-10-12 14:50:15', '2026-10-12 14:50:36'),
-(2, '', '', '', 'VEHICULO 2', 2, 1, 1, 'VEHICULO_21791817000.jpg', '1234', '2026-10-12', 1, '2026-10-12 14:56:40', '2026-10-12 14:56:40');
+(2, '', '', '', 'VEHICULO 2', 2, 1, 1, 'VEHICULO_21791817000.jpg', '1234', '2026-10-12', 1, '2026-10-12 14:56:40', '2026-10-12 14:56:40'),
+(3, '4545-ETT', 'TOYOTA', 'MODELO', 'VEHICULO 3', 2, 2, 2, 'vehiculo_default.jpg', '333', '2026-10-14', 1, '2026-10-14 20:59:05', '2026-10-14 20:59:05'),
+(4, '4545-UUU', '', '', 'VEHICULO 4', 2, 2, 2, 'vehiculo_default.jpg', '456', '2026-10-14', 1, '2026-10-14 21:23:35', '2026-10-14 21:23:35');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `agente_notificacions`
+--
+ALTER TABLE `agente_notificacions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `agente_notificacions_clave_unique` (`clave`);
 
 --
 -- Indices de la tabla `cobros`
@@ -832,10 +944,16 @@ ALTER TABLE `vehiculos`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `agente_notificacions`
+--
+ALTER TABLE `agente_notificacions`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `cobros`
 --
 ALTER TABLE `cobros`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `datos_usuarios`
@@ -853,19 +971,19 @@ ALTER TABLE `empresas`
 -- AUTO_INCREMENT de la tabla `facturas`
 --
 ALTER TABLE `facturas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `ingreso_salidas`
 --
 ALTER TABLE `ingreso_salidas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `log_seguimientos`
 --
 ALTER TABLE `log_seguimientos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `mapeos`
@@ -877,19 +995,19 @@ ALTER TABLE `mapeos`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `notificacion_usuarios`
 --
 ALTER TABLE `notificacion_usuarios`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `pendientes`
 --
 ALTER TABLE `pendientes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -901,19 +1019,19 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `propietarios`
 --
 ALTER TABLE `propietarios`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `salidas`
 --
 ALTER TABLE `salidas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `tarifas`
 --
 ALTER TABLE `tarifas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_vehiculos`
@@ -943,7 +1061,7 @@ ALTER TABLE `user_permisos`
 -- AUTO_INCREMENT de la tabla `vehiculos`
 --
 ALTER TABLE `vehiculos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas

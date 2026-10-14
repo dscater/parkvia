@@ -62,6 +62,7 @@ class PropietarioController extends Controller
         }
 
         //completar los campos foto y fecha registro del propietario
+        $propietario->correo = mb_strtolower($propietario->correo);
         $propietario->foto = $nom_foto;
         $propietario->status = 1;
         $propietario->fecha_reg = date('Y-m-d');
@@ -132,8 +133,9 @@ class PropietarioController extends Controller
             $file_foto->move(public_path() . "/imgs/propietarios/", $nom_foto);
             //completar los campos foto y fecha registro del propietario
             $propietario->foto = $nom_foto;
-            $propietario->save();
         }
+        $propietario->correo = mb_strtolower($propietario->correo);
+        $propietario->save();
 
         LogSeguimiento::create([
             'user_id' => Auth::user()->id,

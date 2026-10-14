@@ -15,10 +15,14 @@ use App\library\numero_a_letras\src\NumeroALetras;
 use PDF;
 use App\Models\Salida;
 use App\Models\LogSeguimiento;
+use App\Services\EnviarCorreoService;
 use DateTime;
 
 class CobroController extends Controller
 {
+
+    public function __construct(private EnviarCorreoService $enviar_correo_service) {}
+
     public function index(Request $request)
     {
         $empresa = Empresa::first();
@@ -358,6 +362,9 @@ class CobroController extends Controller
 
         $cobro->salida->cobro_salida->cobrado = 1;
         $cobro->salida->cobro_salida->save();
+
+        // enviar correo
+        $this->enviar_correo_service->correoCobro($cobro->salida, $cobro->vehiculo_id, $cobro);
 
         LogSeguimiento::create([
             'user_id' => Auth::user()->id,

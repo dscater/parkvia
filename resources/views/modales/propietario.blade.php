@@ -116,9 +116,9 @@
                         <div class="col-md-4">
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="email" name="correo" class="form-control">
+                                    <input type="email" name="correo" class="form-control" required>
                                     {{-- {{ Form::email('correo', null, ['class' => 'form-control']) }} --}}
-                                    <label class="form-label">Email</label>
+                                    <label class="form-label">Email*</label>
                                 </div>
                             </div>
                         </div>
