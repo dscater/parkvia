@@ -92,7 +92,6 @@ class EnviarCorreoService
         return false;
     }
 
-    public function correoEspaciosVacios() {}
     public function correoCobro($ingreso_salida, $vehiculo_id, $cobro)
     {
         $vehiculo = Vehiculo::with('propietario')->find($vehiculo_id);

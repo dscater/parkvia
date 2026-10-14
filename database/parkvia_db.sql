@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 14-10-2026 a las 21:34:00
+-- Tiempo de generación: 14-10-2026 a las 21:50:39
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.2.22
 
@@ -36,6 +36,16 @@ CREATE TABLE `agente_notificacions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `agente_notificacions`
+--
+
+INSERT INTO `agente_notificacions` (`id`, `clave`, `tipo`, `datos`, `enviado_at`, `created_at`, `updated_at`) VALUES
+(4, 'salida_mensual:28:2026-10-16', 'SALIDA_MENSUAL', '{\"vehiculo_id\": 3, \"fecha_objetivo\": \"2026-10-16\", \"propietario_id\": 2, \"ingreso_salida_id\": 28}', '2026-10-14 21:45:15', '2026-10-14 21:45:12', '2026-10-14 21:45:15'),
+(5, 'espacios:inicio:0:1:2026-10-14', 'ESPACIOS_DISPONIBLES', '{\"cantidad\": 0, \"propietario_id\": 1, \"cantidad_anterior\": null}', '2026-10-14 21:47:30', '2026-10-14 21:47:27', '2026-10-14 21:47:30'),
+(6, 'estado_espacios_disponibles', 'ESTADO_ESPACIOS', '{\"cantidad\": 28}', '2026-10-14 21:49:02', '2026-10-14 21:47:30', '2026-10-14 21:49:02'),
+(7, 'espacios:0:28:1:2026-10-14', 'ESPACIOS_DISPONIBLES', '{\"cantidad\": 28, \"propietario_id\": 1, \"cantidad_anterior\": 0}', '2026-10-14 21:49:02', '2026-10-14 21:48:59', '2026-10-14 21:49:02');
 
 -- --------------------------------------------------------
 
@@ -947,7 +957,7 @@ ALTER TABLE `vehiculos`
 -- AUTO_INCREMENT de la tabla `agente_notificacions`
 --
 ALTER TABLE `agente_notificacions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `cobros`

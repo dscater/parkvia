@@ -4,3 +4,6 @@ php artisan schedule:list   => lista los comandos
  
 	 php artisan agente:salidas-mensuales
 	 php artisan agente:espacios-disponibles
+
+
+
