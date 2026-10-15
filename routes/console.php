@@ -11,3 +11,13 @@ Schedule::command('agente:espacios-disponibles')
     ->hourly()
     ->timezone('America/La_Paz')
     ->withoutOverlapping();
+
+// Schedule::command('agente:salidas-mensuales')
+//     ->everyMinute()
+//     ->timezone('America/La_Paz')
+//     ->withoutOverlapping();
+
+// Schedule::command('agente:espacios-disponibles')
+//     ->everyMinute()
+//     ->timezone('America/La_Paz')
+//     ->withoutOverlapping();

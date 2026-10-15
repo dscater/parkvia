@@ -159,6 +159,13 @@ class CobroController extends Controller
     {
         $fecha = $request->fecha;
         $vehiculo = Vehiculo::where('rfid', $request->rfid)->get()->first();
+
+        if (!$vehiculo) {
+            return response()->JSON([
+                'msg' => 'SIN RFID',
+            ]);
+        }
+
         $tarifa = $vehiculo->tarifa;
         $ingreso = IngresoSalida::where('vehiculo_id', $vehiculo->id)
             ->where('status', 1)->get()->last();
@@ -381,6 +388,11 @@ class CobroController extends Controller
         $literal = $convertir->convertir($array_monto[0]);
         $literal .= " " . $array_monto[1] . "/100." . " BOLIVIANOS";
         $pdf = PDF::loadView('cobros.factura', compact('empresa', 'cobro', 'literal'));
+
+        // Ancho: 8 cm = 226.77 puntos
+        // Alto: 30 cm = 850.39 puntos (ajustable)
+        $pdf->setPaper([0, 0, 226.77, 640]);
+
         return $pdf->stream('Factura.pdf');
     }
 }

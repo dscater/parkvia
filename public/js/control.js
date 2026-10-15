@@ -87,13 +87,6 @@ function obtener_seccion() {
 }
 
 function cargaAccion() {
-    compruebaRegistro();
-
-    if (!existe_vehiculo) {
-        guardaPendiente();
-        return;
-    }
-
     $.ajax({
         type: "get",
         url: $("#url_accion").val(),
@@ -281,6 +274,9 @@ function cargarTarifa() {
         data: data,
         dataType: "json",
         success: function (response) {
+            if (response.msg == "SIN RFID") {
+                return;
+            }
             if (response.msg == "SI") {
                 setTimeout(function () {
                     recolecta();
@@ -405,18 +401,18 @@ function compruebaRegistro() {
         dataType: "json",
         success: function (response) {
             existe_vehiculo = response;
-            // if (response) {
-            //     detieneBusqueda();
-            //     cargaAccion();
-            // }
+            if (response) {
+                detieneBusqueda();
+                cargaAccion();
+            }
         },
     });
 }
 
 function iniciaBusqueda() {
-    // busqueda = setInterval(compruebaRegistro,1000);
+    busqueda = setInterval(compruebaRegistro, 3000);
 }
 
 function detieneBusqueda() {
-    // clearInterval(busqueda);
+    clearInterval(busqueda);
 }

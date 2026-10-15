@@ -12,7 +12,7 @@
         }
 
         @page {
-            margin-left: 0;
+            margin-left: 0.5cm;
             margin-top: 0cm;
             margin-right: 0cm;
             margin-bottom: 0cm;

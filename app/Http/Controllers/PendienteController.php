@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Pendiente;
 use App\Models\Vehiculo;
+use Illuminate\Support\Facades\DB;
 
 class PendienteController extends Controller
 {
@@ -45,6 +46,7 @@ class PendienteController extends Controller
         $_rfid = $request->rfid;
         $vehiculo = Vehiculo::where('rfid', $_rfid)->get()->first();
         if ($vehiculo) {
+            DB::update("UPDATE pendientes SET registrado = 'SI' where rfid = '" . $vehiculo->rfid . "'");
             return response()->JSON(true);
         }
         return response()->JSON(false);

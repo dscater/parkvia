@@ -6,4 +6,30 @@ php artisan schedule:list   => lista los comandos
 	 php artisan agente:espacios-disponibles
 
 
+--------------------------------
+Programador de tareas windows
+--------------------------------
+  1) Crear "Nueva Tarea" 
+  2) Nombre: Laravel Parkvia Scheduler
+  3) Seleccionar: Ejecutar tanto si el usuario inició sesión como si no
+  4) Activar: Ejecutar con los privilegios mas altos
+  5) DESENCADENADORES > Nuevo > Diariamente > Cada 1 minuto (Retraso max.)
+  6) ACCIONES > Nueva > Iniciar un programa > Programa/Script (C:\laragon\bin\php\php-8.2.22-nts-Win32-vs16-x64\php.exe) > Argumentos (artisan schedule:run) > Iniciar en (C:\laragon\www\parkvia)
+	> php C:\laragon\www\parkvia\artisan schedule:run
+
+
+======================================
+ENVIO DE CORREOS POR COLAS
+======================================
+
+	> php artisan queue:work --tries=3 --timeout=90
+
+-----------------------------------
+NSSM (Para el uso de Colas)
+-----------------------------------
+	> Ejecutar nssm.exe (para ver los comandos)
+
+		1) Abrir CMD dentro del ejecutable y seguir los pasos
+*apuntar la ruta al proyecto y dejar una cadena que funcione
+C:\laragon\www\proyecto\artisan.php queue:work --tries=3 --timeout=90 -v
 
